@@ -1,4 +1,4 @@
-# HiCPlus
+ HiCPlus
 Impletmented by PyTorch 
 
 ## Dependency
