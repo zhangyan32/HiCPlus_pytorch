@@ -24,6 +24,7 @@ class Net(nn.Module):
         self.conv3 = nn.Conv2d(conv2d2_filters_numbers, 1, conv2d3_filters_size)
 
     def forward(self, x):
+        print("start forwardingf")
         x = self.conv1(x)
         x = F.relu(x)
         x = self.conv2(x)

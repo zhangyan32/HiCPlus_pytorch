@@ -44,8 +44,12 @@ batch_size = 256
 # high_resolution_samples = np.minimum(HiC_max_value, high_resolution_samples)
 
 
-low_resolution_samples = np.load(gzip.GzipFile('../../data/GM12878_replicate_down16_chr19_22.npy.gz', "r")).astype(np.float32) * down_sample_ratio
-high_resolution_samples = np.load(gzip.GzipFile('../../data/GM12878_replicate_original_chr19_22.npy.gz', "r")).astype(np.float32)
+#low_resolution_samples = np.load(gzip.GzipFile('../../data/GM12878_replicate_down16_chr19_22.npy.gz', "r")).astype(np.float32) * down_sample_ratio
+#high_resolution_samples = np.load(gzip.GzipFile('../../data/GM12878_replicate_original_chr19_22.npy.gz', "r")).astype(np.float32)
+
+low_resolution_samples = np.load(gzip.GzipFile('/home/zhangyan/SRHiC_samples/IMR90_down_HINDIII16_chr1_8.npy.gz', "r")).astype(np.float32) * down_sample_ratio
+high_resolution_samples = np.load(gzip.GzipFile('/home/zhangyan/SRHiC_samples/original10k/_IMR90_HindIII_original_chr1_8.npy.gz', "r")).astype(np.float32)
+
 
 low_resolution_samples = np.minimum(HiC_max_value, low_resolution_samples)
 high_resolution_samples = np.minimum(HiC_max_value, high_resolution_samples)
@@ -86,7 +90,7 @@ running_loss_validate = 0.0
 reg_loss = 0.0
 
 # write the log file to record the training process
-log = open('train.txt', 'w')
+log = open('HindIII_train.txt', 'w')
 for epoch in range(0, 100000):
     for i, (v1, v2) in enumerate(zip(lowres_loader, hires_loader)):    
         if (i == len(lowres_loader) - 1):
@@ -119,7 +123,7 @@ for epoch in range(0, 100000):
     running_loss_validate = 0.0
     # save the model every 100 epoches
     if (epoch % 100 == 0):
-        torch.save(Net.state_dict(), 'pytorch_model_' + str(epoch))
+        torch.save(Net.state_dict(), '/home/zhangyan/pytorch_models/pytorch_HindIII_model_' + str(epoch))
         pass
 
 
